@@ -1,6 +1,8 @@
 Helpgen
 =======
 
+**helpgen** helps you to make easily help/usage message of command line tools.
+
 Example
 -------
 
