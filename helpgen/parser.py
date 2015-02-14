@@ -22,9 +22,14 @@ class ActionParser(argparse.ArgumentParser):
                         else:
                             help_msg = ''
 
+                        if len(arg) > 2:
+                            default_value = arg[2]
+                        else:
+                            default_value = None
+
                         _parser.add_argument(arg[0],
                                              help=help_msg,
-                                             default=None)
+                                             default=default_value)
                     else:
                         _parser.add_argument(arg, default=None)
 
