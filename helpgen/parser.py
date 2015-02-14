@@ -15,8 +15,18 @@ class ActionParser(argparse.ArgumentParser):
         for name, (f, fargs) in helpgen.decorators.Action.callbacks.items():
             _parser = subparsers.add_parser(name, help=f.__doc__)
             if fargs is not None:
-                for argname in fargs:
-                    _parser.add_argument(argname, default=None)
+                for arg in fargs:
+                    if isinstance(arg, tuple):
+                        if len(arg) > 1:
+                            help_msg = arg[1]
+                        else:
+                            help_msg = ''
+
+                        _parser.add_argument(arg[0],
+                                             help=help_msg,
+                                             default=None)
+                    else:
+                        _parser.add_argument(arg, default=None)
 
     def process(self, *args, **kwargs):
         """Call the function associated to the sub_command passed in sys.argv
