@@ -26,12 +26,10 @@ class ActionParser(argparse.ArgumentParser):
         pargs = self.parse_args(*args, **kwargs)
 
         if pargs.sub_commands in helpgen.decorators.Action.callbacks.keys():
-            (func, func_args) = helpgen.decorators.Action.callbacks[
-                pargs.sub_commands]
-            if func_args is not None:
-                response = func(
-                    **{_: getattr(pargs, _, None) for _ in func_args})
+            (f, fargs) = helpgen.decorators.Action.callbacks[pargs.sub_commands]
+            if fargs is not None:
+                response = f(**{_: getattr(pargs, _, None) for _ in fargs})
             else:
-                response = func()
+                response = f()
 
         return response
