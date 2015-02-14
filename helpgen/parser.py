@@ -3,6 +3,8 @@ import helpgen.decorators
 
 
 class ActionParser(argparse.ArgumentParser):
+    """Extend `argparse.ArgumentParser`"""
+
     def __init__(self, *args, **kwargs):
         super(ActionParser, self).__init__(*args, **kwargs)
 
@@ -17,6 +19,9 @@ class ActionParser(argparse.ArgumentParser):
         return super(ActionParser, self).parse_args(*args, **kwargs)
 
     def process(self, *args, **kwargs):
+        """Call the function associated to the sub_command passed in sys.argv
+        and return the function response"""
+
         response = None
         pargs = self.parse_args(*args, **kwargs)
 
