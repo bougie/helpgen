@@ -6,7 +6,7 @@ Helpgen
 Example
 -------
 
-This is a short example of how to use the library :
+Next is a short example of how to use the library :
 
 ```python
 #!/usr/bin/env python
@@ -23,35 +23,70 @@ def action_test():
 
     print("I AM A TEST \o/")
 
+
+@Action('hello', args=['word'])
+def action_hello(word):
+    """display a word"""
+
+    print("The word is : %s" % (word,))
+
+
 def main():
     parser = ActionParser(description="helpgen test script")
 
-    parser.process()
-
-    return 0
+    try:
+        parser.process()
+    except:
+        return 1
+    else:
+        return 0
 
 if __name__ == "__main__":
     sys.exit(main())
 ```
 
 
-This peace of code will produce :
+This peace of code will produce these help messages :
 
 ```
 $ ./test.py -h
-usage: test.py [-h] {test} ...
+usage: test.py [-h] {test,hello} ...
 
 helpgen test script
 
 positional arguments:
-  {test}
-      test      run a test
+  {test,hello}
+    test        run a test
+    hello       display a word
 
-	  optional arguments:
-	    -h, --help  show this help message and exit
+optional arguments:
+  -h, --help    show this help message and exit
 ```
+
+```
+$ ./test.py test -h
+usage: test.py test [-h]
+
+optional arguments:
+  -h, --help  show this help message and exit
+```
+
+```
+$ ./test.py hello -h
+usage: test.py hello [-h] word
+
+positional arguments:
+  word
+
+optional arguments:
+  -h, --help  show this help message and exit
+```
+
+And, it works fine :
 
 ```
 $ ./test.py test
 I AM A TEST \o/
+$ ./test.py hello "\_o<~ KOIN"
+The word is : \_o<~ KOIN
 ```
