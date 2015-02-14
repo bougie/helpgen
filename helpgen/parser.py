@@ -12,8 +12,8 @@ class ActionParser(argparse.ArgumentParser):
         """Generate arguments list from `Action` list"""
 
         subparsers = self.add_subparsers(dest='sub_commands')
-        for name, (func, fargs) in helpgen.decorators.Action.callbacks.items():
-            _parser = subparsers.add_parser(name, help=func.__doc__)
+        for name, (f, fargs) in helpgen.decorators.Action.callbacks.items():
+            _parser = subparsers.add_parser(name, help=f.__doc__)
             if fargs is not None:
                 for argname in fargs:
                     _parser.add_argument(argname, default=None)
