@@ -33,6 +33,7 @@ def action_hello(word):
 
 def main():
     parser = ActionParser(description="helpgen test script")
+	parser.compile()
 
     try:
         parser.process()
