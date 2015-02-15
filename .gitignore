@@ -2,3 +2,7 @@
 __pycache__
 .ropeproject
 test.py
+/dist/
+/build/
+/*.egg-info
+/*.egg
